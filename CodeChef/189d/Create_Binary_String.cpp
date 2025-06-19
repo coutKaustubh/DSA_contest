@@ -20,33 +20,28 @@ using namespace std;
 #define yes cout << "YES\n"
 #define no cout << "NO\n"
 
-int gcd(ll a, ll b) {
-    while(b) {
-        a %= b;
-        swap(a, b);
-    }
-    return a;
-}
-
 void solve(){
-    ll x, y;
-        cin >> x >> y;
+    ll N, A, B, C, D;
+        cin >> N >> A >> B >> C >> D;
 
-        ll k = 0;
-        bool found = false;
+        ll mc = 0;
 
-        while(!found) {
-            for(ll i = 0; i <= k; ++i) {
-                ll newX = x + i;
-                ll newY = y + (k - i);
-                if(gcd(newX, newY) > 1) {
-                    cout << k << endl;
-                    found = true;
-                    break;
-                }
+        f(i,N){
+            ll oneCount = N - i;
+
+            ll coin = i * A + oneCount * B;
+
+            if (C >= D) {
+               
+                ll coins = coin + (i * oneCount * C);
+                mc = max(mc, coins);
+            } else {
+                ll coins = coin + (i * oneCount * D);
+                mc = max(mc, coins);
             }
-            ++k;
         }
+
+        cout << mc << endl;
 }
 
 

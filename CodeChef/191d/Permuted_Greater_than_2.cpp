@@ -21,11 +21,20 @@ using namespace std;
 #define no cout << "NO\n"
 
 void solve(){
-    ll n;
-    cin>>n;
-	if(n%3==0)cout<<0;
-	else cout<<1;
-
+    int X, Y, Z;
+        cin >> X >> Y >> Z;
+        
+        if (X == 0) {
+            yes;
+        }
+        else if (Y == 0) {
+            if (X <= Z + 1) yes;
+            else no;
+        }
+        else {
+            if (X <= Z) yes;
+            else no;
+        }
 }
 
 

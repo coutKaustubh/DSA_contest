@@ -21,14 +21,13 @@ using namespace std;
 #define no cout << "NO\n"
 
 void solve(){
-    ll N;
-    cin>>N;
-    int root = sqrt(N);
+    int N;
+        cin >> N;
+        int root = sqrt(N);
         int nearestSquare = root * root;
 
         cout << nearestSquare << endl;
-    }
-
+}
 
 
 int main()
