@@ -1,5 +1,10 @@
 #include <bits/stdc++.h>
+
+
+
 using namespace std;
+
+
 #define ll long long
 #define f(i,n) for (ll i = 0; i < n; i++)
 #define ia(a,n) \
@@ -16,27 +21,20 @@ using namespace std;
 #define no cout << "NO\n"
 
 void solve(){
-    ll N, A, B, C, D;
-        cin >> N >> A >> B >> C >> D;
-
-        ll mc = 0;
-
-        f(i,N){
-            ll oneCount = N - i;
-
-            ll coin = i * A + oneCount * B;
-
-            if (C >= D) {
-               
-                ll coins = coin + (i * oneCount * C);
-                mc = max(mc, coins);
-            } else {
-                ll coins = coin + (i * oneCount * D);
-                mc = max(mc, coins);
-            }
+     int X, Y, Z;
+        cin >> X >> Y >> Z;
+        
+        if (X == 0) {
+            cout << "Yes" << endl;
         }
-
-        cout << mc << endl;
+        else if (Y == 0) {
+            if (X <= Z + 1) cout << "Yes" << endl;
+            else cout << "No" << endl;
+        }
+        else {
+            if (X <= Z) cout << "Yes" << endl;
+            else cout << "No" << endl;
+        }
 }
 
 
