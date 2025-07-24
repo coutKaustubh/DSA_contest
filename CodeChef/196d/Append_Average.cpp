@@ -26,8 +26,33 @@ using namespace std;
 #define no cout << "No\n"
 
 void solve(){
-    ll n;
-    cin>>n;
+    ll n,k;
+    cin>>n>>k;
+
+
+    iv(a,n);
+    ll sum=0;
+    f(i,n){
+        sum+=a[i];
+    }
+    sort(a.begin(),a.end());
+    ll min1 = a[0],min2=a[1];
+    sum+=(min1+min2+1)/2;
+    while(k--){
+       ll avg = (min1+min2+1)/2;
+       if(avg<min2){
+        sum+=avg;
+        min2=avg;
+        k--;
+       }
+       else{
+        sum+=avg*k;
+        break;
+       }
+
+    }
+
+    cout<<sum<<endl;
    
 }
 
