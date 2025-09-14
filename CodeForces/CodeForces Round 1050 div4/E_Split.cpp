@@ -28,15 +28,13 @@ void solve(){
     f(i, n) cin >> a[i];
 
     
-    vector<ll> freq(n + 1, 0);
-    for (auto x : a) freq[x]++;
+   unordered_map<int,int>freq;
+     for (auto x : a) freq[x]++;
 
     
     bool possible = true;
-    vector<ll> limit(n + 1, 0);
     for (ll v = 1; v <= n; v++) {
         if (freq[v] % k != 0) possible = false;
-        limit[v] = freq[v] / k;
     }
 
     if (!possible) {
@@ -45,17 +43,20 @@ void solve(){
     }
 
     ll ans = 0;
-    vector<ll> inside(n + 1, 0);
+   unordered_map<int,int>mp;
     ll r = 0;
 
     for (ll l = 0; l < n; l++) {
         
-        while (r < n && inside[a[r]] + 1 <= limit[a[r]]) {
-            inside[a[r]]++;
+        while (r < n) {
+            if(mp[a[r]] < freq[a[r]]/k){
+            mp[a[r]]++;
             r++;
+            }
+            else break;
         }     
         ans += (r - l);
-        inside[a[l]]--;
+        mp[a[l]]--;
     }
 
     cout << ans << nline;
