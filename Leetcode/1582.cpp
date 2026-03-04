@@ -7,7 +7,7 @@ public:
         f(i,mat.size()){
         int cR=0,cC=0,index=-1;
             f(j,mat[0].size()){
-                if(mat[i][j]==1){
+                if(mat[i][j]==1){  
                     index=j;
                     cR++;
                 }
