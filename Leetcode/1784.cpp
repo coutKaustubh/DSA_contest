@@ -12,16 +12,35 @@
 // };
 
 
+// class Solution {
+// public:
+//     bool checkOnesSegment(string s) {
+//         int c=0;
+//         if(s.size() == 1 && s[0] == '1')return true;
+//         for(int i=0;i<s.size();i++){
+//             if(s[i] == '1')c++;
+//             else c=0;
+//             if(c==2)return true;
+//         }
+//         return false;
+//     }
+// };
+
+
 class Solution {
 public:
     bool checkOnesSegment(string s) {
-        int c=0;
+        bool flag=true;
         if(s.size() == 1 && s[0] == '1')return true;
         for(int i=0;i<s.size();i++){
-            if(s[i] == '1')c++;
-            else c=0;
-            if(c==2)return true;
+            if(s[i] == '1'){
+                if(!flag)return false;
+            }
+            else {
+                flag = false;
+            }
+            
         }
-        return false;
+        return true;
     }
 };
