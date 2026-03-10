@@ -25,19 +25,22 @@ using namespace std;
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
+vector<vector<int>>dp;
 int mcm(vector<ll>&a,ll l,ll r){
     ll minA = INT_MAX;
     if(l>=r)return 0;
-    for(int k = l;k<r-1;k++){
+    if(dp[l][r] != -1)return dp[l][r];
+    for(int k = l;k<=r-1;k++){
         ll temp = mcm(a,l,k)+mcm(a,k+1,r) + a[l-1]*a[k]*a[r];
         minA = min(minA,temp);
     }
-    return minA;
+    return dp[l][r] = minA;
 }
 void solve(){
     ll n;
     cin>>n;
     iv(a,n);
+    dp.assign(n+1,vector<int>(n+1,-1));
     cout<<mcm(a,1,n-1)<<nline;;
    
 }
