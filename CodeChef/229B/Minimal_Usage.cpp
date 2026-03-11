@@ -25,42 +25,71 @@ using namespace std;
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
-bool can_form(ll tK, ll tS, ll N, ll M) {
-    if (tK == 0) return tS == 0;
-    if (tS < tK) return false;
-    if (M == 1) {
-        if (N == 1) return false; 
-        return (tS >= 2 * tK && tS <= N * tK);
-    }
-    if (M == N) {
-        return (tS >= 1 * tK && tS <= (N - 1) * tK);
+bool possible(ll k, ll s, ll N, ll M) {
+
+    if(k == 0) return s == 0;
+
+    if(M == 1){
+        ll low = 2 * k;
+        ll high = N * k;
+
+        if(s >= low && s <= high)
+            return true;
+        else
+            return false;
     }
 
-    ll c_max = (tS - tK) / M;
+    if(M == N){
+        ll low = k;
+        ll high = (N-1) * k;
 
-    ll num = tS - tK * (M - 1);
+        if(s >= low && s <= high)
+            return true;
+        else
+            return false;
+    }
+
+    ll maxC = (s - k) / M;
+
+    ll num = s - k*(M-1);
     ll den = N - M + 1;
-    ll c_min = 0;
-    if (num > 0) {
-        c_min = (num + den - 1) / den; 
+
+    ll minC = 0;
+
+    if(num > 0){
+        minC = (num + den - 1) / den;
     }
-    return max(0LL, c_min) <= min(tK, c_max);
+
+    ll left = max(0LL, minC);
+    ll right = min(k, maxC);
+
+    if(left <= right)
+        return true;
+    else
+        return false;
 }
 
 void solve(){
-    ll n, k, s, m;
-    cin >> n >> k >> s >> m;
-    
+    ll N,K,S,M;
+    cin>>N>>K>>S>>M;
 
-    for(ll x=0;x<=k;x++){
-        ll remK = k-x;
-        ll remS = s - x*m;
-        if(can_form(remK,remS , n ,m)){
-            cout<<x<<endl;
-            return;
+    ll l = 0, r = K, ans = K;
+
+    while(l<=r){
+        ll mid = (l+r)/2;
+
+        ll remK = K - mid;
+        ll remS = S - mid*M;
+
+        if(possible(remK, remS, N, M)){
+            ans = mid;
+            r = mid-1;
         }
+        else
+            l = mid+1;
     }
-    
+
+    cout<<ans<<"\n";
 }
 
 int main()
