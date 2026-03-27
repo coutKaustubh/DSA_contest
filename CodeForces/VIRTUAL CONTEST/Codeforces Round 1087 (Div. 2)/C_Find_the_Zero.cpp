@@ -25,7 +25,7 @@ using namespace std;
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
-int judgeQuerq(int i,int j){
+int judgeQuery(int i,int j){
     cout<<"? "<<i<<" "<<j<<endl;
     int x;
     cin>>x;
@@ -35,14 +35,14 @@ void solve(){
     ll n;
     cin>>n;
     for(int i=1;i<= 2*n-2 ; i+=2){
-        int x = judgeQuerq(i,i+1);
+        int x = judgeQuery(i,i+1);
         if(x==1){
             cout<<"! "<<i<<endl;
             return;
         }
     }
-    int x = judgeQuerq(1,(2*n-1));
-    int y = judgeQuerq(2,(2*n-1));
+    int x = judgeQuery(1,(2*n-1));
+    int y = judgeQuery(2,(2*n-1));
     if(x==1){
         cout<<"! "<<1<<endl;
         return;
