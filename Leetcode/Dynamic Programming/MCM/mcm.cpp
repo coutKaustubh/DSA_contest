@@ -36,6 +36,9 @@ int mcm(vector<ll>&a,ll l,ll r){
     }
     return dp[l][r] = minA;
 }
+
+
+//
 void solve(){
     ll n;
     cin>>n;
