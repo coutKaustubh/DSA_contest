@@ -11,7 +11,7 @@ public:
                     index=j;
                     cR++;
                 }
-            }
+            }                                                          
 
             if(cR==1){
                 for(int r=0;r<mat.size();r++){
