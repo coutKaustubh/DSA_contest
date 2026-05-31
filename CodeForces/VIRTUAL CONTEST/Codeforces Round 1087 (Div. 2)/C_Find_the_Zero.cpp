@@ -37,18 +37,18 @@ void solve(){
     for(int i=1;i<= 2*n-2 ; i+=2){
         int x = judgeQuery(i,i+1);
         if(x==1){
-            cout<<"! "<<i<<endl;
+            cout<<"! "<<i<<endl;   //i+1 bhi valid h
             return;
         }
     }
     int x = judgeQuery(1,(2*n-1));
     int y = judgeQuery(2,(2*n-1));
     if(x==1){
-        cout<<"! "<<1<<endl;
+        cout<<"! "<<1<<endl; // 2*n-1 bhi valid h , bcz dono euqla h tbhi 1 ayega
         return;
     }
     else if(y==1){
-        cout<<"! "<<2<<endl;
+        cout<<"! "<<2<<endl;  // 2*n-1 bhi valid h , bcz dono euqla h tbhi 1 ayega
         return;
     }
     else{

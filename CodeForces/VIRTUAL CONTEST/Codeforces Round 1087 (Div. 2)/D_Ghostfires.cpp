@@ -19,19 +19,47 @@ using namespace std;
 
     
 #define MOD (1000000007)
-#define INF 1000000000000000000LL // Infinity for ll
+#define INF 1000000000000000000LL 
 #define mp make_pair
 #define nline '\n'
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
 void solve(){
-    string s;
-    cin>>s;
-    
-   
-}
+    ll R, G, B;
+    cin >> R >> G >> B;
 
+    vector<pair<ll,char>> a = {
+        {R,'R'}, {G,'G'}, {B,'B'}
+    };
+
+    string ans = "";
+
+    while(true){
+        sort(a.begin(), a.end(), greater<>());
+
+        bool placed = false;
+
+        for(int j = 0; j < 3; j++){
+            if(a[j].first == 0) continue;
+
+            char ch = a[j].second;
+            int i = ans.size();
+
+            if(i-1 >= 0 && ans[i-1] == ch) continue;
+            if(i-3 >= 0 && ans[i-3] == ch) continue;
+
+            ans.push_back(ch);
+            a[j].first--;
+            placed = true;
+            break;
+        }
+
+        if(!placed) break; 
+    }
+
+    cout << ans << "\n";
+}
 
 int main()
 {

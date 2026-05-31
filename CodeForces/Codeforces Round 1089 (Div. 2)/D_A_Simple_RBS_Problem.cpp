@@ -1,5 +1,10 @@
 #include <bits/stdc++.h>
+
+
+
 using namespace std;
+
+
 #define ll long long
 #define f(i,n) for (ll i = 0; i < n; i++)
 #define ia(a,n) \
@@ -20,22 +25,28 @@ using namespace std;
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
-bool cmp(pair<int,int>a,pair<int,int>b){
-    if(a.first != b.first)return a.first<b.first;
-    return a.second<b.second;
+bool ok(string s, string t){
+    int n = s.size();
+
+    for(int i = 0; i < n; i++){
+        if(s.compare(0, i+1, t, n-(i+1), i+1) == 0){
+            
+            if(s.compare(i+1, n-(i+1), t, 0, n-(i+1)) == 0){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 void solve(){
-    ll n,p;
-    cin>>n>>p;
-    iv(a,n);
-    iv(b,n);
-    vector<pair<int,int>>v;
-    f(i,n){
-        v.push_back({a[i],b[i]});
-    }
-    sort(v.begin(),v.end(),cmp);
+    ll n;
+    cin>>n;
+    string s,t;
+    cin>>s>>t;
+    bool ok = false;
 
-   
+if(ok) cout << "YES\n";
+else cout << "NO\n";
 }
 
 
