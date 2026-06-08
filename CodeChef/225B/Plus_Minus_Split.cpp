@@ -1,5 +1,10 @@
 #include <bits/stdc++.h>
+
+
+
 using namespace std;
+
+
 #define ll long long
 #define f(i,n) for (ll i = 0; i < n; i++)
 #define ia(a,n) \
@@ -20,38 +25,47 @@ using namespace std;
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
-bool cmp(pair<int,int>a,pair<int,int>b){                            
-    if(a.first != b.first)return a.first<b.first;
-    return a.second<b.second;
-}
-void solve(){
-    ll n,p;
-    cin>>n>>p;
-    iv(a,n);
-    iv(b,n);
-    vector<pair<int,int>>v;
-    f(i,n){
-        v.push_back({a[i],b[i]});
+bool allEqual(vector<ll>& a) {
+    for (int i = 1; i < a.size(); i++) {
+        if (a[i] != a[0])
+            return false;
     }
-    sort(v.begin(),v.end(),cmp);
-
-   
+    return true;
 }
 
+void solve() {
+    ll n;
+    cin >> n;
+    iv(a,n);
 
-int main()
-{
-    ios_base::sync_with_stdio(false);
+    if (allEqual(a)) {
+        cout << "Yes\n";
+        return;
+    }
+
+    if(a[0]<0){
+        f(i,n){
+            if(a[i] < 0)a[i]=a[i]*-1;
+            else break;
+        }
+    }
+    else if(a[n-1] < 0){
+        for(int i=n-1;i>=0;i--){
+            if(a[i]<0)a[i]=a[i]*-1;
+            else break;
+        }
+    }
+    if(allEqual(a))yes;
+    else no;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
     cin.tie(NULL);
-    cout.tie(NULL);
 
-    long long t = 1;
+    int t;
     cin >> t;
-
-    while (t--)
-    {
+    while (t--) {
         solve();
     }
-
-    return 0;
 }

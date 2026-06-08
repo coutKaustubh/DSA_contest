@@ -1,5 +1,10 @@
 #include <bits/stdc++.h>
+
+
+
 using namespace std;
+
+
 #define ll long long
 #define f(i,n) for (ll i = 0; i < n; i++)
 #define ia(a,n) \
@@ -14,29 +19,40 @@ using namespace std;
 
     
 #define MOD (1000000007)
-#define INF 1000000000000000000LL // Infinity for ll
+#define INF 1000000000000000000LL 
 #define mp make_pair
 #define nline '\n'
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
-bool cmp(pair<int,int>a,pair<int,int>b){                            
-    if(a.first != b.first)return a.first<b.first;
-    return a.second<b.second;
-}
-void solve(){
-    ll n,p;
-    cin>>n>>p;
-    iv(a,n);
-    iv(b,n);
-    vector<pair<int,int>>v;
-    f(i,n){
-        v.push_back({a[i],b[i]});
-    }
-    sort(v.begin(),v.end(),cmp);
 
-   
+void solve() {
+    int n;
+    cin>>n;
+    string s;
+    cin >> s;
+
+    vector<int> freq(26, 0);
+
+    for (char c : s) {
+        c = tolower(c);
+        freq[c - 'a']++;
+    }
+
+    int max1 = 0, max2 = 0;
+
+    for (int x : freq) {
+        if (x > max1) {
+            max2 = max1;
+            max1 = x;
+        } else if (x > max2) {
+            max2 = x;
+        }
+    }
+
+    cout << max1 + max2 << '\n';
 }
+
 
 
 int main()
