@@ -17,4 +17,4 @@ int main(){
  while(t--){
  solve();
  }  
-}
+}                                       
