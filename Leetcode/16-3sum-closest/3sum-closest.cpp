@@ -2,23 +2,29 @@ class Solution {
 public:
     int threeSumClosest(vector<int>& nums, int target) {
         sort(nums.begin(), nums.end());
-                int result = nums[0] + nums[1] + nums[2];
+        int n = nums.size();
 
-                        for (int i = 0; i < nums.size() - 2; i++) {
-                                    int left = i + 1, right = nums.size() - 1;
+        int ans = nums[0] + nums[1] + nums[2];
 
-                                                while (left < right) {
-                                                                int sum = nums[i] + nums[left] + nums[right];
+        for (int i = 0; i < n - 2; i++) {
+            int j = i + 1;
+            int k = n - 1;
 
-                                                                                if (abs(target - sum) < abs(target - result))
-                                                                                                    result = sum;
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
 
-                                                                                                                    if (sum == target) return target;
-                                                                                                                                    else if (sum < target) left++;
-                                                                                                                                                    else right--;
-                                                                                                                                                                }
-                                                                                                                                                                        }
+                if (abs(target - sum) < abs(target - ans))
+                    ans = sum;
 
-                                                                                                                                                                                return result;
+                if (sum < target)
+                    j++;
+                else if (sum > target)
+                    k--;
+                else
+                    return sum;
+            }
+        }
+
+        return ans;
     }
 };
