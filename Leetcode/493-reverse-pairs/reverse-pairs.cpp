@@ -1,3 +1,5 @@
+#pragma GCC optimize("O3,unroll-loops,fast-math")
+#pragma GCC target("avx2,bmi,bmi2,popcnt,lzcnt,abm")
 class Solution {
 public:
     int merge(vector<int>& arr, int left, int mid, int right) {
