@@ -1,71 +1,64 @@
-#pragma GCC optimize("O3,unroll-loops,fast-math")
-#pragma GCC target("avx2,bmi,bmi2,popcnt,lzcnt,abm")
 class Solution {
 public:
-    int merge(vector<int>& arr, int left, int mid, int right) {
-        int cnt=0;
-        int n1 = mid - left + 1;
-        int n2 = right - mid;
+    void merge(vector<int>& arr, int low, int mid, int high) {
+        int n1 = mid - low + 1;
+        int n2 = high - mid;
 
-        vector<int> L(n1), R(n2);
+        vector<int> left(n1), right(n2);
 
         for (int i = 0; i < n1; i++)
-            L[i] = arr[left + i];
-        for (int j = 0; j < n2; j++)
-            R[j] = arr[mid + 1 + j];
+            left[i] = arr[low + i];
+
+        for (int i = 0; i < n2; i++)
+            right[i] = arr[mid + 1 + i];
 
         int i = 0, j = 0;
-        int k = left;
+        int k = low;
+
         while (i < n1 && j < n2) {
-            if (L[i] <= R[j]) {
-                arr[k] = L[i];
-                i++;
-            } else {
-                arr[k] = R[j];
-                j++;
-            }
-            k++;
+            if (left[i] <= right[j])
+                arr[k++] = left[i++];
+            else
+                arr[k++] = right[j++];
         }
-        while (i < n1) {
-            arr[k] = L[i];
-            i++;
-            k++;
+
+        while (i < n1)
+            arr[k++] = left[i++];
+
+        while (j < n2)
+            arr[k++] = right[j++];
+    }
+
+    int countPairs(vector<int>& arr, int low, int mid, int high) {
+        int right = mid + 1;
+        int cnt = 0;
+
+        for (int i = low; i <= mid; i++) {
+            while (right <= high && arr[i] > 2LL * arr[right])
+                right++;
+
+            cnt += right - (mid + 1);
         }
-        while (j < n2) {
-            arr[k] = R[j];
-            j++;
-            k++;
-        }
+
         return cnt;
     }
-    int countPairs(vector<int> &arr, int low, int mid, int high) {
-    int right = mid + 1;
-    int cnt = 0;
 
-    for (int i = low; i <= mid; i++) {
-        while (right <= high && arr[i] > 2LL * arr[right])
-            right++;
+    int mergesort(vector<int>& arr, int low, int high) {
+        if (low >= high)
+            return 0;
 
-        cnt += (right - (mid + 1));
-    }
+        int mid = low + (high - low) / 2;
 
-    return cnt;
-    }
-    int mergeSort(vector<int>& arr, int left, int right) {
-        int cnt=0;
-        if (left >= right)
-            return cnt;
-
-        int mid = left + (right - left) / 2;
-        cnt+= mergeSort(arr, left, mid);
-        cnt+= mergeSort(arr, mid + 1, right);
-        cnt+= countPairs(arr,left,mid,right);
-        merge(arr, left, mid, right);
+        int cnt = 0;
+        cnt += mergesort(arr, low, mid);
+        cnt += mergesort(arr, mid + 1, high);
+        cnt += countPairs(arr, low, mid, high);
+        merge(arr, low, mid, high);
 
         return cnt;
     }
 
     int reversePairs(vector<int>& nums) {
-        return mergeSort(nums,0,nums.size()-1);
+        return mergesort(nums, 0, nums.size() - 1);
     }
 };
