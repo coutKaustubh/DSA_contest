@@ -1,51 +1,27 @@
 class Solution {
 public:
-    int atoiFun(string &s) {
-        long long ans = 0;
-        int n = s.size();
-
-        if (s.empty())
-            return 0;
-
-        int start = (s[0] == '-' || s[0] == '+') ? 1 : 0;
-
-        for (int i = start; i < n; i++) {
-            int digit = s[i] - '0';
-
-            // Check BEFORE ans = ans * 10 + digit
-            if (ans > INT_MAX / 10 ||
-                (ans == INT_MAX / 10 && digit > INT_MAX % 10)) {
-
-                if (s[0] == '-')
-                    return INT_MIN;
-                else
-                    return INT_MAX;
-            }
-
-            ans = ans * 10 + digit;
-        }
-
-        return s[0] == '-' ? -ans : ans;
+    int recursiveApproachStoi(int i,long long result,int &sign , string &s){
+        if (i >= s.size())return result * sign;
+        if (s[i] < '0' || s[i] >'9')return result*sign;
+        result = result * 10 + (s[i] - '0');
+        if (result * sign > INT_MAX)return INT_MAX;
+        if (result * sign < INT_MIN)return INT_MIN;
+        return recursiveApproachStoi(i+1,result,sign,s);
     }
-
     int myAtoi(string s) {
-        string final = "";
-
         int i = 0;
-
-        while (i < s.size() && s[i] == ' ')
+        while (s[i] == ' ') {
             i++;
-
-        if (i < s.size() && (s[i] == '-' || s[i] == '+')) {
-            final += s[i];
+        }
+        int sign = 1;
+        if (s[i] == '+' || s[i] == '-') {
+            if (s[i] == '-') {
+                sign = -1;
+            }
             i++;
         }
 
-        while (i < s.size() && s[i] >= '0' && s[i] <= '9') {
-            final += s[i];
-            i++;
-        }
-
-        return atoiFun(final);
+        long long result = 0;
+        return recursiveApproachStoi(i,result,sign,s);
     }
 };
