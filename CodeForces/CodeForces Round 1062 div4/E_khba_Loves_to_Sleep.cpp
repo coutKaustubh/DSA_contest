@@ -10,7 +10,7 @@ using namespace std;
 #define ia(a,n) \
     ll a[n];     \
     f(i,n) cin >> a[i]
-#define iv(v, n)     \
+#define iv(v, n)     \    
     vector<ll> v(n); \
     f(i,n) cin >> v[i]
 
