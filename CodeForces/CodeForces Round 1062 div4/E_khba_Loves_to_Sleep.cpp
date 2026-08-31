@@ -25,7 +25,7 @@ using namespace std;
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
-void solve(){
+void solve(){                                           
     ll n,k,x;
     cin>>n>>k>>x;
     iv(a,n);
