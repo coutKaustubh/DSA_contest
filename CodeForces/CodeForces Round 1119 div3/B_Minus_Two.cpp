@@ -9,7 +9,7 @@ using namespace std;
 #define f(i,n) for (ll i = 0; i < n; i++)
 #define ia(a,n) \
     ll a[n];     \
-    f(i,n) cin >> a[i]                   
+    f(i,n) cin >> a[i]
 #define iv(v, n)     \
     vector<ll> v(n); \
     f(i,n) cin >> v[i]
@@ -25,32 +25,25 @@ using namespace std;
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
-void solve() {
-    int n;
+void solve(){
+    ll n;
     cin >> n;
-
-    vector<long long> a(n);
-
-    long long tot = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-        tot |= a[i];
-    }
-
-    int segments = 0;
-    long long cur = 0;
-
-    for (int i = 0; i < n; i++) {
-        cur |= a[i];
-
-        if (cur == tot) {
-            segments++;
-            cur = 0;
+    iv(a, n);
+    ll oddCount = 0, cnt0mod4 = 0, cnt2mod4 = 0;
+    for (ll x : a) {
+        if (x % 2 != 0) {
+            oddCount++;
+        } else {
+            if (x % 4 == 0) cnt0mod4++;
+            else cnt2mod4++; // x % 4 == 2
         }
     }
 
-    cout << n - segments << '\n';
+    ll ans = max({oddCount, cnt0mod4, cnt2mod4});
+    cout << ans << '\n';
+   
 }
+
 
 int main()
 {

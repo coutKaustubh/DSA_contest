@@ -9,7 +9,7 @@ using namespace std;
 #define f(i,n) for (ll i = 0; i < n; i++)
 #define ia(a,n) \
     ll a[n];     \
-    f(i,n) cin >> a[i]                   
+    f(i,n) cin >> a[i]
 #define iv(v, n)     \
     vector<ll> v(n); \
     f(i,n) cin >> v[i]
@@ -26,32 +26,20 @@ using namespace std;
 #define no cout << "No\n"
 
 void solve() {
-    int n;
+    ll n;
     cin >> n;
+    iv(a, n);
 
-    vector<long long> a(n);
+    ll totalWait = 0;
+    ll enterTime = a[0];
 
-    long long tot = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-        tot |= a[i];
+    for (int i = 1; i < n; i++) {
+        enterTime = max(enterTime, a[i]);
+        totalWait += (enterTime - a[i]);
     }
 
-    int segments = 0;
-    long long cur = 0;
-
-    for (int i = 0; i < n; i++) {
-        cur |= a[i];
-
-        if (cur == tot) {
-            segments++;
-            cur = 0;
-        }
-    }
-
-    cout << n - segments << '\n';
+    cout << totalWait << "\n";
 }
-
 int main()
 {
     ios_base::sync_with_stdio(false);

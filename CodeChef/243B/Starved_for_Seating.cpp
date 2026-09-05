@@ -8,7 +8,7 @@ using namespace std;
 #define ll long long
 #define f(i,n) for (ll i = 0; i < n; i++)
 #define ia(a,n) \
-    ll a[n];     \
+    ll a[n];     \                                            
     f(i,n) cin >> a[i]
 #define iv(v, n)     \
     vector<ll> v(n); \

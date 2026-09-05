@@ -9,7 +9,7 @@ using namespace std;
 #define f(i,n) for (ll i = 0; i < n; i++)
 #define ia(a,n) \
     ll a[n];     \
-    f(i,n) cin >> a[i]                   
+    f(i,n) cin >> a[i]
 #define iv(v, n)     \
     vector<ll> v(n); \
     f(i,n) cin >> v[i]
@@ -25,31 +25,39 @@ using namespace std;
 #define yes cout << "Yes\n"
 #define no cout << "No\n"
 
-void solve() {
-    int n;
+void solve(){
+    ll n;
     cin >> n;
+    vector<ll> a(n);
+    for (auto &x : a) cin >> x;
 
-    vector<long long> a(n);
+    ll cnt0 = count(a.begin(), a.end(), 0);
 
-    long long tot = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
-        tot |= a[i];
+    if (cnt0 == 1) {
+        cout << "NO\n";
+        return;
     }
 
-    int segments = 0;
-    long long cur = 0;
-
-    for (int i = 0; i < n; i++) {
-        cur |= a[i];
-
-        if (cur == tot) {
-            segments++;
-            cur = 0;
+    string s(n, 'C');
+    bool firstZero = true;
+    for (ll i = 0; i < n; i++) {
+        if (a[i] == 0) {
+            if (firstZero) { s[i] = 'A'; firstZero = false; }
+            else s[i] = 'B';
+        }
+    }
+    fill(s.begin(), s.end(), 'C');
+    int zerosSeen = 0;
+    for (ll i = 0; i < n; i++) {
+        if (a[i] == 0) {
+            zerosSeen++;
+            if (zerosSeen == 1) s[i] = 'A';
+            else if (zerosSeen == 2) s[i] = 'B';
+            else s[i] = 'A'; 
         }
     }
 
-    cout << n - segments << '\n';
+    cout << "YES\n" << s << "\n";
 }
 
 int main()
