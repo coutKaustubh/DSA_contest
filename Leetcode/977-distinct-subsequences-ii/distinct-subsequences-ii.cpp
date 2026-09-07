@@ -14,6 +14,6 @@ public:
             }
             result = (result + dp[i]) % MOD;
         }
-        return result;
+        return (result)%MOD;
     }
 };
