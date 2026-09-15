@@ -5,6 +5,11 @@ public:
         unordered_map<int,int>freq;
         int ans = 0;
         while(r<nums.size()){
+          
+          
+          
+          
+          
             freq[nums[r]]++;
             while(freq.size() > k){
                 freq[nums[l]] --;
