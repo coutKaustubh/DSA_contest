@@ -31,7 +31,7 @@ is wale question me jitne 1 h sb milke ek hi province ya fir ek hi connected com
     
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < m; j++) {
-            if(adj[i][j] == '1') {
+            if(adj[i][j] != '0') {
                 count++;
                 dfs(adj, i, j);
                 }
