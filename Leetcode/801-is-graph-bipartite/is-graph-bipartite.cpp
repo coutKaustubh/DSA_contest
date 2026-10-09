@@ -1,21 +1,18 @@
 class Solution {
 public:
-    bool bfs(int node,unordered_map<int,vector<int>>&adjls,vector<int>&color){
-        queue<int>q;
-        q.push(node); //node ---> parent
-        color[node] = 0;
-        while(!q.empty()){
-            int node = q.front();
-            q.pop();
-            for(auto it:adjls[node]){
-                 if(color[it] == -1){
-                    color[it] = !color[node];
-                    q.push(it);
-                 }
-                 else if(color[it]== color[node])return false;
+    bool dfs(int node,int col,unordered_map<int,vector<int>>&adjls,vector<int>&color){
+        color[node] = col;
+
+        for(auto it:adjls[node]){
+            if(color[it] == -1){
+                if(!dfs(it,!col,adjls,color))return false;
+            }
+            else{
+                if(color[it] == col)return false;
             }
         }
-        return true;
+    return true;
+
     }
     bool isBipartite(vector<vector<int>>& graph) {
         unordered_map<int,vector<int>>adjls;
@@ -26,10 +23,11 @@ public:
                 adjls[i].push_back(graph[i][j]);
             }
         }
+
         vector<int>color(n,-1); //-1 no color , 0/1  both colors
         for(int i=0;i<n;i++){
             if(color[i] == -1){
-                if(!bfs(i,adjls,color))return false;
+                if(!dfs(i,0,adjls,color))return false;
             }
         }
         return true;
