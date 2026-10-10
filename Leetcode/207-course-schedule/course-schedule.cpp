@@ -1,36 +1,36 @@
-
 class Solution {
 public:
-    bool dfs(int node, vector<int>& vis, vector<int>& Pathvis,unordered_map<int, vector<int>>& adjls) {
-        vis[node] = 1;
-        Pathvis[node] = 1;
-        for (auto it : adjls[node]) {
-            if (!vis[it]) {
-                if (dfs(it, vis, Pathvis, adjls))
-                    return true;
+    bool canFinish(int V, vector<vector<int>>& prerequisites) {
+        unordered_map<int, vector<int>> adj;
+        for (auto it : prerequisites) {
+            adj[it[1]].push_back(it[0]);
+        }
+        vector<int> indegree(V, 0);
+
+        for (int i = 0; i < V; i++) {
+            for (auto it : adj[i]) {
+                indegree[it]++;
             }
-            else if (Pathvis[it]) {
-                return true;
+        }
+        queue<int> q;
+        int cnt=0;
+        for (int i = 0; i < V; i++) {
+            if (indegree[i] == 0) {
+                q.push(i);
+            }
+        }
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            cnt++;
+            for (auto it : adj[node]) {
+                indegree[it]--;
+                if (indegree[it] == 0) {
+                    q.push(it);
+                }
             }
         }
 
-        Pathvis[node] = 0;
-        return false;
-    }
-
-    bool canFinish(int n, vector<vector<int>>& prerequisites) {
-        unordered_map<int, vector<int>> adjls;
-        for (auto &p : prerequisites) {
-            adjls[p[1]].push_back(p[0]);
-        }
-        vector<int> vis(n, 0);
-        vector<int> Pathvis(n, 0);
-        for (int i = 0; i < n; i++) {
-            if (!vis[i]) {
-                if (dfs(i, vis, Pathvis, adjls))
-                    return false;
-            }
-        }
-        return true;
+       return cnt==V;
     }
 };
