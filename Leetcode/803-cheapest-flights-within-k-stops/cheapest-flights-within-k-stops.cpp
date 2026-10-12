@@ -7,6 +7,7 @@ public:
         }
         // {stops, {node, cost}}
         queue<pair<int, pair<int, int>>> q;
+        //yahan pr bhi queue chal jayega bcz isme bhi stops har bar + 1 hi ho rha jo ki same h har bar like leetcode 1091 so simply queue 
         vector<int> dist(n, 1e9);
         dist[src] = 0;
         q.push({0, {src, 0}});
@@ -19,7 +20,7 @@ public:
             for (auto it : adjls[node]) {
                 int nextnode = it.first;
                 int price = it.second;
-                if (cost + price < dist[nextnode] && stops <= k) {
+                if (cost + price < dist[nextnode]) {
                     dist[nextnode] = cost + price;
                     q.push({stops+1, {nextnode, cost+price}});
                 }
