@@ -7,25 +7,19 @@ public:
         }
         // {stops, {node, cost}}
         queue<pair<int, pair<int, int>>> q;
-
         vector<int> dist(n, 1e9);
         dist[src] = 0;
-
         q.push({0, {src, 0}});
-
         while (!q.empty()) {
             int stops = q.front().first;
             int node = q.front().second.first;
             int cost = q.front().second.second;
             q.pop();
-
             if (stops > k) continue;
-
             for (auto it : adjls[node]) {
                 int nextnode = it.first;
                 int price = it.second;
-
-                if (cost + price < dist[nextnode]) {
+                if (cost + price < dist[nextnode] && stops <= k) {
                     dist[nextnode] = cost + price;
                     q.push({stops+1, {nextnode, cost+price}});
                 }
