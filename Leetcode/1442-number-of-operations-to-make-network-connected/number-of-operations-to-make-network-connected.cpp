@@ -88,3 +88,5 @@ public:
         return cntExtras>=cnt?cnt:-1;
     }
 };
+
+//is code me , hme pehle figure out bhi krna pdega ki extra edges jo h voh jarurat se jyda h ki nhi so hm kya krenge ki agar dono nodes jisko connect krna h i.e U and V ka ultimate parents same h toh  connected h therefore voh extra node h 
