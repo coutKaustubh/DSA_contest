@@ -1,16 +1,18 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        int ele =-1;
-        int cnt = 0;
-        // intuition - cnt ++ when we find similar ele else cnt -- , so if at end cnt>0 so that ele is majority
-
-        for(int i=0;i<nums.size();i++){
-            if(cnt==0)ele = nums[i];
-            if(ele == nums[i])cnt++;
-            else cnt--;
+        int c=0,ele=0;
+        int n = nums.size();
+        for(auto x:nums){
+            if(c==0)ele = x;
+            if(ele == x)c++;
+            else c--;
+        }
+        c=0;
+        for(auto x:nums){
+            if(x==ele)c++;
         }
 
-        return ele;
+        return c>n/2?ele:-1;
     }
 };
